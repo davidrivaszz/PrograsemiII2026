@@ -8,63 +8,10 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/lblTipo"
-        android:text="TIPO:"
+        android:id="@+id/lblSensorProximidad"
+        android:text="Proximidad: "
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <Spinner
-        android:entries="@array/tipo"
-        android:id="@+id/spnTipo"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="60dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/lblDe"
-        android:text="DE:"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <Spinner
-        android:id="@+id/spnDe"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="60dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/lblA"
-        android:text="A:"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <Spinner
-        android:id="@+id/spnA"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="100dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/txtCantidad"
-        android:layout_marginTop="140dp"
-        android:hint="Cantidad a convertir"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/lblRespuesta"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="20dp"
-        android:text="Respuesta: ?"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/btnConvertir"
-        android:layout_marginTop="240dp"
-        android:text="CONVERTIR"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
 </RelativeLayout>
