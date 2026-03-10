@@ -8,8 +8,8 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/lblSensorAcelerometro"
-        android:text="Acelerometro: "
+        android:id="@+id/lblSensorLuz"
+        android:text="Luz: "
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
