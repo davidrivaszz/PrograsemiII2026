@@ -8,5 +8,19 @@
     <color name="blue_soft">#42A5F5</color>
     <color name="bg">#F2FFFD</color>
     <color name="text_primary">#0F172A</color>
-
+    <color name="teal">#00897B</color>
+    <color name="text_dark">#1A1A2E</color>
+    <color name="text_hint">#888888</color>
+    <color name="accent_red">#FF4444</color>
 </resources>
+
+
+
+
+
+
+
+
+
+
+
