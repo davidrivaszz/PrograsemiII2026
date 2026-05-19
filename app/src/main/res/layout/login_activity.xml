@@ -101,6 +101,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Tu nombre de usuario"
                     android:inputType="text"
+                    android:textColor="@color/black"
                     android:textSize="15sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -131,6 +132,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Tu contraseña"
                     android:inputType="textPassword"
+                    android:textColor="@color/black"
                     android:textSize="15sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
