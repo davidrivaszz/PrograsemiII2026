@@ -3,91 +3,77 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tempVal;
-    Button btn;
-    Spinner spn;
 
+    TabHost tbh;
+    TextView tempVal;
+    Spinner spn;
+    Button btn;
+    Double valores[] = new Double[] {1.0, 0.85, 7.67, 26.42, 36.80, 495.77};
+    Double longitudes[] = new Double[] {1.0, 1000.0, 100.0, 39.3701, 3.280841666667, 1.1963081929167, 1.09361};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn = findViewById(R.id.btnCalcular);
-        btn.setOnClickListener(v -> calcular());
+        tbh = findViewById(R.id.tbhConversores);
+        tbh.setup();
+
+        tbh.addTab(tbh.newTabSpec("Monedas").setContent(R.id.tabMonedas).setIndicator("", getDrawable(R.drawable.monedas)));
+        tbh.addTab(tbh.newTabSpec("Longitud").setContent(R.id.tabLongitud).setIndicator("", getResources().getDrawable(R.drawable.longitud)));
+        tbh.addTab(tbh.newTabSpec("Volumen").setContent(R.id.tabVolumen).setIndicator("", getDrawable(R.drawable.volumen)));
+        tbh.addTab(tbh.newTabSpec("Masa").setContent(R.id.tabMasa).setIndicator("", getDrawable(R.drawable.masa)));
+
+        btn = findViewById(R.id.btnMonedasConvertir);
+        btn.setOnClickListener(v->convertirMonedas());
+
+        btn = findViewById(R.id.btnLongitudConvertir);
+        btn.setOnClickListener(v->convertirLongitud());
     }
+    private void convertirLongitud(){
+        spn = findViewById(R.id.spnLongitudDe);
+        int de = spn.getSelectedItemPosition();
 
-    private void calcular() {
-        try {
-            // Leer num1 (Si está vacío, lo tomamos como 0.0 para evitar errores)
-            tempVal = findViewById(R.id.txtNum1);
-            String strNum1 = tempVal.getText().toString();
-            double num1 = strNum1.isEmpty() ? 0.0 : Double.parseDouble(strNum1);
+        spn = findViewById(R.id.spnLongitudA);
+        int a = spn.getSelectedItemPosition();
 
-            // Leer num2 (Si está vacío, lo tomamos como 0.0)
-            tempVal = findViewById(R.id.txtNum2);
-            String strNum2 = tempVal.getText().toString();
-            double num2 = strNum2.isEmpty() ? 0.0 : Double.parseDouble(strNum2);
+        tempVal = findViewById(R.id.txtLongitudCantidad);
+        double cantidad = Double.parseDouble(tempVal.getText().toString());
+        double respuesta = conversorLongitud(de, a, cantidad);
 
-            double respuesta = 0;
+        tempVal = findViewById(R.id.lblLongitudRespuesta);
+        tempVal.setText("Respuesta: "+ respuesta);
+    }
+    private void convertirMonedas(){
+        spn = findViewById(R.id.spnMonedasDe);
+        int de = spn.getSelectedItemPosition();
 
-            spn = findViewById(R.id.cboOpciones);
-            switch (spn.getSelectedItemPosition()) {
-                case 0: // Suma
-                    respuesta = num1 + num2;
-                    break;
-                case 1: // Resta
-                    respuesta = num1 - num2;
-                    break;
-                case 2: // Multiplicacion
-                    respuesta = num1 * num2;
-                    break;
-                case 3: // Division
-                    if (num2 != 0) {
-                        respuesta = num1 / num2;
-                    } else {
-                        Toast.makeText(this, "No se puede dividir entre 0", Toast.LENGTH_SHORT).show();
-                        respuesta = 0;
-                    }
-                    break;
-                case 4: // Factorial (Calculado en base a num1)
-                    if (num1 < 0) {
-                        Toast.makeText(this, "No hay factorial de negativos", Toast.LENGTH_SHORT).show();
-                    } else {
-                        respuesta = 1;
-                        for (int i = 1; i <= (int) num1; i++) {
-                            respuesta *= i;
-                        }
-                    }
-                    break;
-                case 5: // Porcentaje (El num1 % de num2)
-                    respuesta = (num1 * num2) / 100.0;
-                    break;
-                case 6: // Exponenciacion (num1 elevado a num2)
-                    respuesta = Math.pow(num1, num2);
-                    break;
-                case 7: // Raiz (num1 es la base, num2 es el indice de la raiz)
-                    if (num2 == 0) {
-                        Toast.makeText(this, "El índice de la raíz no puede ser 0", Toast.LENGTH_SHORT).show();
-                    } else {
-                        respuesta = Math.pow(num1, 1.0 / num2);
-                    }
-                    break;
-            }
+        spn = findViewById(R.id.spnMonedasA);
+        int a = spn.getSelectedItemPosition();
 
-            // Mostrar el resultado
-            tempVal = findViewById(R.id.lblRespuesta);
-            tempVal.setText("Respuesta: " + respuesta);
+        tempVal = findViewById(R.id.txtMonedasCantidad);
+        double cantidad = Double.parseDouble(tempVal.getText().toString());
+        double respuesta = conversor(de, a, cantidad);
 
-        } catch (Exception e) {
-            // Si algo sale mal (ej. texto no válido), mostramos un mensaje en lugar de que la app se cierre
-            Toast.makeText(this, "Por favor, ingresa números válidos", Toast.LENGTH_SHORT).show();
-        }
+        tempVal = findViewById(R.id.lblMonedasRespuesta);
+        tempVal.setText("Respuesta: "+ respuesta);
+    }
+    double conversor(int de, int a, double cantidad){
+        return valores[a]/valores[de] * cantidad;
+    }
+    double conversorLongitud(int de, int a, double cantidad){
+        return longitudes[a]/longitudes[de] * cantidad;
     }
 }
